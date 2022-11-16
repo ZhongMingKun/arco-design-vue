@@ -24,7 +24,8 @@ export const useRowSelection = ({
     'select': (
       rowKeys: BaseType[],
       rowKey: BaseType,
-      record: TableData
+      record: TableData,
+      checked: boolean
     ) => true;
     'selectAll': (checked: boolean) => true;
     'selectionChange': (rowKeys: BaseType[]) => true;
@@ -64,7 +65,7 @@ export const useRowSelection = ({
       ? [record.key]
       : union(selectedRowKeys.value, [record.key], !checked);
     _selectedRowKeys.value = selectedAllRowKeys;
-    emit('select', selectedAllRowKeys, record.key, record.raw);
+    emit('select', selectedAllRowKeys, record.key, record.raw, !checked);
     emit('selectionChange', selectedAllRowKeys);
     emit('update:selectedKeys', selectedAllRowKeys);
   };
@@ -72,7 +73,7 @@ export const useRowSelection = ({
   const handleSelectAllLeafs = (record: TableDataWithRaw, checked: boolean) => {
     const newKeys = union(selectedRowKeys.value, getLeafKeys(record), !checked);
     _selectedRowKeys.value = newKeys;
-    emit('select', newKeys, record.key, record.raw);
+    emit('select', newKeys, record.key, record.raw, !checked);
     emit('selectionChange', newKeys);
     emit('update:selectedKeys', newKeys);
   };

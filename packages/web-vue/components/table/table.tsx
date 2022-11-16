@@ -438,7 +438,8 @@ export default defineComponent({
     'select': (
       rowKeys: (string | number)[],
       rowKey: string | number,
-      record: TableData
+      record: TableData,
+      checked: boolean
     ) => true,
     /**
      * @zh 点击全选选择器时触发
